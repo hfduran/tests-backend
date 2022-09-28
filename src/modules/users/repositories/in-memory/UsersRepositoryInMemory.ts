@@ -34,9 +34,14 @@ class UsersRepositoryInMemory implements IUsersRepository {
 
     return foundUser;
   }
-  create(data: ICreateUserDTO): Promise<Users> {
-    const newUser = { ...data, id: this.getId() } as Users;
 
-    this.users.concat();
+  public async create(data: ICreateUserDTO): Promise<Users> {
+    const newUser = { id: this.getId(), ...data } as Users;
+
+    this.users.push(newUser);
+
+    return newUser;
   }
 }
+
+export default UsersRepositoryInMemory;
